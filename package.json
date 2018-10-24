@@ -41,6 +41,6 @@
   },
   "scripts": {
     "build": "python3 manage.py makemigrations frinet && python3 manage.py migrate",
-    "start": "export NODE_ENV=production; python3 manage.py runserver & webpack --env.production  --watch --config webpack.config.js --progress --color"
+    "start": "export NODE_ENV=production; uwsgi --socket :8001 --wsgi-file cloud_net/wsgi.py & webpack --env.production  --watch --config webpack.config.js --progress --color"
   }
 }

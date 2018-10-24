@@ -25,8 +25,7 @@ SECRET_KEY = 'd*j@x24s9^qu#r(jcm48)t37&7i++(&h&#l^ytr&=y1@p3y2(&'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ["18.223.114.173", "ec2-18-223-114-173.us-east-2.compute.amazonaws.com"]
 
 # Application definition
 
@@ -79,11 +78,21 @@ WSGI_APPLICATION = 'cloud_net.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3')
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'cloud_net',
+        'USER': 'cs436',
+        'PASSWORD': 'cs436',
+        'HOST': '',
+        'PORT': ''
     }
 }
 
+CACHEDS = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': 'unix:/tmp/memcached.sock',
+    }
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/

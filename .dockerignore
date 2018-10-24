@@ -2,5 +2,6 @@
 node_module
 build
 READ*
+DockerFile
 webpack-stats.json
 .idea
