@@ -1,0 +1,2 @@
+CREATE DATABASE cloud_net
+GRANT ALL PRIVILEGES ON *.* TO 'cs436'@'localhost' IDENTIFIED BY 'cs436';
