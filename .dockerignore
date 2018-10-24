@@ -5,3 +5,4 @@ READ*
 DockerFile
 webpack-stats.json
 .idea
+docker/

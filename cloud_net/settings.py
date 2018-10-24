@@ -25,7 +25,7 @@ SECRET_KEY = 'd*j@x24s9^qu#r(jcm48)t37&7i++(&h&#l^ytr&=y1@p3y2(&'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["18.223.114.173", "ec2-18-223-114-173.us-east-2.compute.amazonaws.com"]
+ALLOWED_HOSTS = ["*"]
 
 # Application definition
 
@@ -82,15 +82,15 @@ DATABASES = {
         'NAME': 'cloud_net',
         'USER': 'cs436',
         'PASSWORD': 'cs436',
-        'HOST': '',
-        'PORT': ''
+        'HOST': 'mysql',
+        'PORT': '3306'
     }
 }
 
 CACHEDS = {
     'default': {
         'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
-        'LOCATION': 'unix:/tmp/memcached.sock',
+        'LOCATION': 'memcached:11211',
     }
 }
 
