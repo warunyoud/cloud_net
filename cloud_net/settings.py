@@ -81,8 +81,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'cloud_net',
         'USER': 'cs436',
-        'PASSWORD': 'cs436',
-        'HOST': 'mysql',
+        'PASSWORD': 'kingcaesar',
+        'HOST': '####',
         'PORT': '3306'
     }
 }
@@ -90,7 +90,7 @@ DATABASES = {
 CACHEDS = {
     'default': {
         'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
-        'LOCATION': 'memcached:11211',
+        'LOCATION': '####:11211',
     }
 }
 
