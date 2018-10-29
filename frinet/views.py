@@ -16,6 +16,7 @@ from django.contrib.auth import logout, login, authenticate
 from .models import *
 from .serializers import UserSerializer, PostSerializer
 
+import memcache
 
 def index(request):
     return render_to_response('index.html')
@@ -33,11 +34,15 @@ def get_friends(request):
 @api_view(['GET'])
 @permission_classes((IsAuthenticated,))
 def get_posts(request):
+    mc = memcache.Client(['memcached:11211'], debug=0)
     user = request._request.user
 
     # TODO: Your caching logic here
+    obj = mc.get(str(user))
+    if obj is not None:
+        print('Return cached ' + str(user))
+        return JsonResponse(obj, safe=False)
 
-    
     all_users = list(user.friends.all())
     all_users.append(user)
 
@@ -50,6 +55,8 @@ def get_posts(request):
 
     # limit the post number to 25 and serialize the post
     post_ser = [PostSerializer(p).data for p in all_posts[:25]]
+    mc.set(str(user), post_ser)
+    print('Caching ' + str(user))
     
     return JsonResponse(post_ser, safe=False)
 
@@ -58,8 +65,11 @@ def get_posts(request):
 @parser_classes((JSONParser,))
 @permission_classes((IsAuthenticated,))
 def make_post(request):
+    mc = memcache.Client(['memcached:11211'], debug=0)
     content = request.data.get('content')
     user = request._request.user
+    mc.delete(str(user))
+    
     post = Post(user=user, content=content)
     post.save()
     return JsonResponse({'post_id': post.id})
